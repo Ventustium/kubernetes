@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ubuntu-stress
+  labels:
+    purpose: ubuntu-stress
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ubuntu-stress
+  template:
+    metadata:
+      labels:
+        app: ubuntu-stress
+    spec:
+      containers:
+      - name: ubuntu-stress
+        image: ventustium/ubuntu-stress
+        command: ["bin/sh", "-c"]
+        args: ["stress --cpu 1"]
